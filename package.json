@@ -1,0 +1,47 @@
+{
+  "name": "add-banner",
+  "description": "Add a banner to a string. Banners are just Lo-Dash/underscore templates, if a custom one isn't defined a default will be used.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/add-banner",
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonschlinkert/add-banner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/add-banner/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jonschlinkert/add-banner/blob/master/LICENSE-MIT"
+    }
+  ],
+  "keywords": [
+    "banner",
+    "banners",
+    "comments",
+    "comment"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "devDependencies": {
+    "chai": "~1.9.1",
+    "mocha": "*",
+    "verb": "~0.2.6",
+    "verb-tag-jscomments": "^0.1.4"
+  },
+  "dependencies": {
+    "load-pkg": "^0.1.0",
+    "parse-authors": "^0.1.1",
+    "strip-banner": "^0.1.1",
+    "template": "^0.2.1",
+    "xtend": "^3.0.0",
+    "year": "^0.1.2"
+  }
+}
