@@ -67,5 +67,5 @@ module.exports = function(str, options) {
   var context = ctx(extend({}, pkg, options));
 
   var banner = template(tmpl, context, options);
-  return banner + strip(str);
+  return banner + strip(read(str));
 };
