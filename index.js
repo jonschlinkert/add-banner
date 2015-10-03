@@ -20,7 +20,7 @@ function read(filepath) {
 var ctx = function (context) {
   var opts = {
     author: context.author.name || author(context.author)[0].name || 'unknown',
-    homepage: context.homepage || context.repo.url || 'unknown',
+    homepage: context.homepage || (context.repository && context.repository.url) || 'unknown',
     license: context.license || 'MIT',
     year: context.year || year()
   };
