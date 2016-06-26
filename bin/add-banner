@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+// vim: syntax=javascript
+
+const fs = require('fs');
+
+var banner = require('../index');
+var pkg = require('load-pkg');
+var program = require('commander');
+
+program
+  .version(pkg.version)
+  .option('-t, --template [filepath]', 'path to template file')
+  .usage('[options] <pattern>')
+  .parse(process.argv);
+
+if (program.args.length < 1) {
+  console.error('Command argument for files missing!');
+  process.exit(1);
+}
+
+function bannerise(file) {
+  if (fs.writeFile(file, banner(file, options))) {
+    console.log('Banner added to', file);
+  }
+}
+
+var options = program.template ? {banner: program.template} : {};
+program.args.forEach(bannerise);
