@@ -37,11 +37,15 @@
     "verb-tag-jscomments": "^0.1.4"
   },
   "dependencies": {
+    "commander": "^2.9.0",
     "load-pkg": "^0.1.0",
     "parse-authors": "^0.1.1",
     "strip-banner": "^0.1.1",
     "template": "^0.2.1",
     "xtend": "^3.0.0",
     "year": "^0.1.2"
+  },
+  "bin": {
+    "add-banner": "./bin/add-banner"
   }
 }
