@@ -7,7 +7,8 @@ describe('banner', function() {
   var FILEPATH = 'test-target.js';
 
   context('without options (using defaults)', function() {
-    var expectation = '/*!\n * add-banner <https://github.com/jonschlinkert/add-banner>\n *\n * Copyright (c) 2018 Jon Schlinkert, contributors.\n * Licensed under the MIT license.\n */\n\n';
+    var year =  new Date().getFullYear();
+    var expectation = '/*!\n * add-banner <https://github.com/jonschlinkert/add-banner>\n *\n * Copyright (c) ' + year + ' Jon Schlinkert, contributors.\n * Licensed under the MIT license.\n */\n\n';
     it('expected to populate banner', function() {
       expect(banner(FILEPATH)).to.eql(expectation);
     });
