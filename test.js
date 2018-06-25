@@ -4,7 +4,7 @@ let expect = chai.expect;
 
 describe('banner', () => {
 
-  const FILEPATH = 'test-target.js';
+  let filepath = 'test-target.js';
 
   context('without options (using defaults)', () => {
     let expectation = `/*!
@@ -16,7 +16,7 @@ describe('banner', () => {
 
 `;
     it('expected to populate banner', () => {
-      expect(banner(FILEPATH)).to.eql(expectation);
+      expect(banner(filepath)).to.eql(expectation);
     });
   });
 
@@ -41,7 +41,7 @@ describe('banner', () => {
 `;
 
     it('expected to populate banner', () => {
-      expect(banner(FILEPATH, options)).to.eql(expectation);
+      expect(banner(filepath, options)).to.eql(expectation);
     });
   });
 
