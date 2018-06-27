@@ -1,71 +1,66 @@
+/*!
+ * add-banner <https://github.com/jonschlinkert/add-banner>
+ *
+ * Copyright (c) 2014-present Jon Schlinkert.
+ * Licensed under the MIT license.
+ */
 
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var template = require('template');
-var strip = require('strip-banner');
-var pkg = require('load-pkg');
-var extend = require('xtend');
-var year = require('year');
-var author = require('parse-authors');
+const fs = require('fs');
+const path = require('path');
+const author = require('parse-authors');
+const strip = require('strip-banner');
+const Engine = require('engine');
+const load = require('load-pkg');
+const year = require('year');
+const read = filepath => fs.readFileSync(filepath, 'utf8');
 
-var defaultBanner = path.join(__dirname, 'banner.tmpl');
+/**
+ * Create the context necessary for rendering the banner template
+ */
 
-function read(filepath) {
-  filepath = path.resolve(process.cwd(), filepath);
-  return fs.readFileSync(filepath, 'utf8');
-}
-
-var ctx = function (context) {
-  var opts = {
-    author: context.author.name || author(context.author)[0].name || 'unknown',
-    homepage: context.homepage || (context.repository && context.repository.url) || 'unknown',
-    license: context.license || 'MIT',
-    year: context.year || year()
+const createContext = locals => {
+  const person = locals.author || '';
+  const repository = locals.homepage || locals.repository || '';
+  const homepage = repository.url ? repository.url : repository;
+  const context = {
+    author: person.name || author(person)[0].name || 'unknown',
+    homepage: homepage || 'unknown',
+    license: locals.license || 'MIT',
+    year: locals.year || year()
   };
-  return extend({}, context, opts);
+  return Object.assign({}, locals, context);
 };
 
 /**
- * ## addBanner(str, options)
- *
- * **Examples:**
+ * Add a comment banner to the specified JavaScript file.
  *
  * ```js
- * var banner = require('add-banner');
+ * const banner = require('add-banner');
  * banner('index.js');
+ *
+ * // Specify a custom banner template to use:
+ * banner('index.js', { banner: 'my-banner.tmpl' });
+ *
+ * // Define custom locals to use when rendering the template
+ * banner('index.js', { name: 'foo', username: 'jonschlinkert' });
  * ```
- *
- * Specify a custom banner:
- *
- * ```js
- * var banner = require('add-banner');
- * banner('index.js', {banner: 'my-banner.tmpl'});
- * ```
- *
- * Extend the context:
- *
- * ```js
- * var banner = require('add-banner');
- * banner('index.js', {username: 'jonschlinkert'});
- * ```
- *
- * **Params:**
- *
  * @param  {String} `filepath` The file to update with a banner.
- * @param  {Object} `options` Pass a custom banner template to `banner`, or
- *     extend the context passed to templates. By default package.json is used,
- *     any property added to the options object will extend the default object
- *     (package.json) and will be passed to templates as context.
+ * @param  {Object} `options` Pass a custom banner template to `banner`, or extend the context passed to templates. By default package.json is used, any property added to the options object will extend the default object (package.json) and will be passed to templates as context.
  * @return {String}
  */
 
-module.exports = function(str, options) {
-  options = options || {};
-  var tmpl = read(options.banner || defaultBanner);
-  var context = ctx(extend({}, pkg, options));
-
-  var banner = template(tmpl, context, options);
-  return banner + strip(read(str));
+module.exports = function(str, options = {}) {
+  const engine = new Engine(options);
+  const pkg = load.sync(options);
+  const tmpl = read(options.template || path.join(__dirname, 'banner.tmpl'));
+  const context = createContext(Object.assign({}, pkg, options));
+  const fn = engine.compile(tmpl, options);
+  const banner = fn(context);
+  let content = strip(read(str));
+  if (content[0] === '\n' && banner.slice(-1) === '\n') {
+    content = content.slice(1);
+  }
+  return banner + content;
 };

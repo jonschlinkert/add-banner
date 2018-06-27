@@ -4,48 +4,55 @@
   "version": "0.1.0",
   "homepage": "https://github.com/jonschlinkert/add-banner",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/jonschlinkert/add-banner.git"
-  },
+  "repository": "jonschlinkert/add-banner",
   "bugs": {
     "url": "https://github.com/jonschlinkert/add-banner/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/jonschlinkert/add-banner/blob/master/LICENSE-MIT"
-    }
-  ],
-  "keywords": [
-    "banner",
-    "banners",
-    "comments",
-    "comment"
+  "license": "MIT",
+  "files": [
+    "bin",
+    "index.js"
   ],
   "main": "index.js",
+  "bin": {
+    "add-banner": "bin/add-banner.js"
+  },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha -R spec"
-  },
-  "devDependencies": {
-    "chai": "~3.5.0",
-    "mocha": "~3.5.3",
-    "verb": "~0.2.6",
-    "verb-tag-jscomments": "^0.1.4"
+    "test": "mocha"
   },
   "dependencies": {
-    "commander": "^2.9.0",
-    "load-pkg": "^0.1.0",
-    "parse-authors": "^0.1.1",
-    "strip-banner": "^0.1.1",
-    "template": "^0.2.1",
-    "xtend": "^3.0.0",
-    "year": "^0.1.2"
+    "engine": "^0.1.12",
+    "load-pkg": "^4.0.0",
+    "minimist": "^1.2.0",
+    "parse-authors": "^0.2.4",
+    "strip-banner": "^0.2.0",
+    "year": "^0.2.1"
   },
-  "bin": {
-    "add-banner": "./bin/add-banner"
+  "devDependencies": {
+    "gulp-format-md": "^1.0.0",
+    "mocha": "^3.5.3"
+  },
+  "keywords": [
+    "add",
+    "banner",
+    "banners",
+    "comment",
+    "comments"
+  ],
+  "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
