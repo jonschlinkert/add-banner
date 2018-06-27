@@ -1,7 +1,7 @@
 {
   "name": "add-banner",
   "description": "Add a banner to a string. Banners are just Lo-Dash/underscore templates, if a custom one isn't defined a default will be used.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/jonschlinkert/add-banner",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/add-banner",
