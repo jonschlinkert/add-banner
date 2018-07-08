@@ -5,21 +5,25 @@ const fs = require('fs');
 const path = require('path');
 const load = require('load-pkg');
 const pkg = load.sync(path.join(__dirname, '..'));
-const argv = require('minimist')(process.argv.slice(2));
 const banner = require('..');
+const program = require('commander');
 
-if (argv.version) {
-  console.log('add-banner', pkg.version);
-  process.exit();
-}
+program
+  .version(pkg.version)
+  .option('-t, --template [filepath]', 'path to template file')
+  .usage('[options] <pattern>')
+  .parse(process.argv);
 
-if (!argv._[0]) {
+if (program.args.length < 1) {
   console.error('Command argument for files missing!');
   process.exit(1);
 }
 
-argv._.forEach(file => {
-  if (fs.writeFile(file, banner(file, argv))) {
-    console.log('Banner added to:', file);
+const bannerise = file => {
+  if (fs.writeFile(file, banner(file, options))) {
+    console.log('Banner added to', file);
   }
-});
+}
+
+const options = program.template ? {banner: program.template} : {};
+program.args.forEach(bannerise);
