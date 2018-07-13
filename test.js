@@ -52,7 +52,7 @@ describe('CLI', () => {
     const expectation = '\n  Usage: add-banner [options] <pattern>\n\n' +
       '  Options:\n\n' +
       '    -V, --version              output the version number\n' +
-      '    -t, --template [filepath]  path to template file\n' +
+      '    -t, --template [filepath]  path to template file (default: banner.tmpl)\n' +
       '    -h, --help                 output usage information\n';
 
     context('--help', () => {

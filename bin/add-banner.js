@@ -10,7 +10,7 @@ const program = require('commander');
 
 program
   .version(pkg.version)
-  .option('-t, --template [filepath]', 'path to template file')
+  .option('-t, --template [filepath]', 'path to template file', 'banner.tmpl')
   .usage('[options] <pattern>')
   .parse(process.argv);
 
