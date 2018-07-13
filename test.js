@@ -111,4 +111,34 @@ describe('CLI', () => {
 
   });
 
+  context('template', () => {
+
+    const bannerAdded = 'Banner added to test-target.js\n';
+
+    context('--template banner.tmpl test-target.js', () => {
+
+      before((done) => {
+        cliout('--template banner.tmpl test-target.js', done);
+      });
+
+      it('expected to add banner using template', () => {
+        assert.strictEqual(capture, bannerAdded);
+      });
+
+    });
+
+    context('-t banner.tmpl test-target.js', () => {
+
+      before((done) => {
+        cliout('-t banner.tmpl test-target.js', done);
+      });
+
+      it('expected to add banner using template', () => {
+        assert.strictEqual(capture, bannerAdded);
+      });
+
+    });
+
+  });
+
 });

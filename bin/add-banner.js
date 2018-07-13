@@ -20,10 +20,13 @@ if (program.args.length < 1) {
 }
 
 const bannerise = file => {
-  if (fs.writeFile(file, banner(file, options))) {
+  fs.writeFile(file, banner(file, options), (err) => {
+    if (err) {
+      throw err;
+    }
     console.log('Banner added to', file);
-  }
-}
+  });
+};
 
 const options = program.template ? {banner: program.template} : {};
 program.args.forEach(bannerise);
