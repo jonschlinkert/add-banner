@@ -14,7 +14,7 @@ const strip = require('strip-banner');
 const Engine = require('engine');
 const load = require('load-pkg');
 const year = require('year');
-const read = filepath => fs.readFileSync(filepath, 'utf8');
+const read = filepath => fs.readFileSync(path.resolve(process.cwd(), filepath), 'utf8');
 
 /**
  * Create the context necessary for rendering the banner template
