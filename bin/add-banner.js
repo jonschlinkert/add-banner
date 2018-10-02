@@ -28,5 +28,5 @@ const bannerise = file => {
   });
 };
 
-const options = program.template ? {banner: program.template} : {};
+const options = program.template ? {template: program.template} : {};
 program.args.forEach(bannerise);
